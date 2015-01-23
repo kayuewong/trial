@@ -453,9 +453,48 @@ Ship = function () {
       this.delayBeforeBullet -= delta;
     }
     if (KEY_STATUS.space) {
+<<<<<<< HEAD
       if (this.delayBeforeBullet <= 0) {
         this.delayBeforeBullet = 10;
         this.shoot();
+||||||| merged common ancestors
+      if (this.delayBeforeBullet <= 0) {
+        for (var i = 0; i < this.bullets.length; i++) {
+          if (!this.bullets[i].visible) {
+            SFX.laser();
+            var bullet = this.bullets[i];
+            var rad = ((this.rot-90) * Math.PI)/180;
+            var vectorx = Math.cos(rad);
+            var vectory = Math.sin(rad);
+            // move to the nose of the ship
+            bullet.x = this.x + vectorx * 4;
+            bullet.y = this.y + vectory * 4;
+            bullet.vel.x = 6 * vectorx + this.vel.x;
+            bullet.vel.y = 6 * vectory + this.vel.y;
+            bullet.visible = true;
+            break;
+          }
+        }
+=======
+      if (this.delayBeforeBullet <= 0)
+       {this.delayBeforeBullet = 10;
+        for (var i = 0; i < this.bullets.length; i++) {
+          if (!this.bullets[i].visible) {
+            SFX.laser();
+            var bullet = this.bullets[i];
+            var rad = ((this.rot-90) * Math.PI)/180;
+            var vectorx = Math.cos(rad);
+            var vectory = Math.sin(rad);
+            // move to the nose of the ship
+            bullet.x = this.x + vectorx * 4;
+            bullet.y = this.y + vectory * 4;
+            bullet.vel.x = 6 * vectorx + this.vel.x;
+            bullet.vel.y = 6 * vectory + this.vel.y;
+            bullet.visible = true;
+            break;
+          }
+        }
+>>>>>>> easy-mode
       }
     }
 
@@ -690,7 +729,7 @@ Asteroid = function () {
   this.collidesWith = ["ship", "bullet", "bigalien", "alienbullet"];
 
   this.breakIntoFragments = function () {
-    for (var i = 0; i < 3; i++) {
+    for (var i = 0; i < 2; i++) {
       var roid = $.extend(true, {}, this);
       roid.vel.x = Math.random() * 6 - 3;
       roid.vel.y = Math.random() * 6 - 3;
